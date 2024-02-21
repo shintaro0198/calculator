@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="../css/destyle.css">
+  <link rel="stylesheet" href="../css/index.css">
+  <title>Document</title>
+</head>
+
+<body>
+  <main>
+    <div class="main-left"></div>
+    <div class="main-right">
+      <p id="bracket"></p>
+      <p id="solution">0</p>
+      <table>
+        <tr>
+          <td class="btn gray"><input type="text" value="(" readonly></td>
+          <td class="btn gray"><input id="bracket-end" type="text" value=")" readonly></td>
+          <td class="btn gray"><input type="text" value="%" onclick="calculate(this)" readonly></td>
+          <td class="btn gray"><input type="text" value="AC" onclick="calculate(this)" readonly></td>
+        </tr>
+        <tr>
+          <td class="btn light-gray"><input type="number" value="7" onclick="calculate(this)"  readonly></td>
+          <td class="btn light-gray"><input type="number" value="8" onclick="calculate(this)"  readonly></td>
+          <td class="btn light-gray"><input type="number" value="9" onclick="calculate(this)"  readonly></td>
+          <td class="btn gray"><input type="text" value="÷"  readonly></td>
+        </tr>
+        <tr>
+          <td class="btn light-gray"><input type="number" value="4" onclick="calculate(this)"  readonly></td>
+          <td class="btn light-gray"><input type="number" value="5" onclick="calculate(this)"  readonly></td>
+          <td class="btn light-gray"><input type="number" value="6" onclick="calculate(this)"  readonly></td>
+          <td class="btn gray"><input type="text" value="×" onclick="calculate(this)" readonly></td>
+        </tr>
+        <tr>
+          <td class="btn light-gray"><input type="number" value=1 onclick="calculate(this)" readonly></td>
+          <td class="btn light-gray"><input type="number" value="2" onclick="calculate(this)"  readonly></td>
+          <td class="btn light-gray"><input type="number" value="3" onclick="calculate(this)"  readonly></td>
+          <td class="btn gray"><input type="text" value="-" onclick="calculate(this)" readonly></td>
+        </tr>
+        <tr>
+          <td class="btn light-gray"><input type="number" value=0 onclick="calculate(this)" readonly></td>
+          <td class="btn light-gray"><input type="text" value="." onclick="calculate(this)" readonly></td>
+          <td class="btn blue"><input type="text" value="=" onclick="calculate(this)"  eadonly></td>
+          <td class="btn gray"><input type="text" value="+"  onclick="calculate(this)"  readonly></td>
+        </tr>
+      </table>
+      <a id="test">test</a>
+    </div>
+  </main>
+  <script>
+    let text = document.getElementById('solution');
+    function calculate(num){
+      if(num.value === "="){
+        text.innerHTML = eval(text.innerHTML);
+      } else if(num.value === "AC"){
+        text.innerHTML = 0;
+      } else if(num.value === "×"){
+        num.value = "*"
+      } else if(num.value === "÷"){
+        num.value === "/"
+      } else if(text.innerHTML === "0"){
+        console.log(0)
+        if(Number(num.value)){
+          text.innerHTML = num.value
+        }
+      } else{
+        text.innerHTML += num.value
+      }
+    }
+  </script>
+</body>
+</html>

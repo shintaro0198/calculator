@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="../css/destyle.css">
+  <link rel="stylesheet" href="../css/index.css">
+  <title>Document</title>
+</head>
+<body>
+  <main>
+    <div class="main-left"></div>
+    <div class="main-right">
+      <p id="bracket"></p>
+      <p id="solution">0</p>
+      <table>
+        <tr>
+          <td class="btn gray"><input id="bracket-start" type="text" value="(" readonly onclick="bracketOn(this)"></td>      <td class="btn gray"><input id="bracket-end" type="text" value=")" onclick="bracketOn(this)" readonly></td>      <td class="btn gray"><input type="text" value="%" onclick="percent()" readonly></td>      <td class="btn gray"><input type="text" value="AC" onclick="ac()" readonly></td>
+        </tr>
+        <tr>
+          <td class="btn light-gray"><input type="number" value="7" onclick="inputNumber(this)" readonly ></td>      <td class="btn light-gray"><input type="number" value="8" onclick="inputNumber(this)" readonly ></td>      <td class="btn light-gray"><input type="number" value="9" onclick="inputNumber(this)" readonly ></td>      <td class="btn gray"><input type="text" value="÷" onclick="mathSymbol(this)" readonly></td>
+        </tr>
+        <tr>
+          <td class="btn light-gray"><input type="number" value="4" onclick="inputNumber(this)" readonly ></td>      <td class="btn light-gray"><input type="number" value="5" onclick="inputNumber(this)" readonly ></td>      <td class="btn light-gray"><input type="number" value="6" onclick="inputNumber(this)" readonly ></td>      <td class="btn gray"><input type="text" value="×" onclick="mathSymbol(this)" readonly></td>
+        </tr>
+        <tr>
+          <td class="btn light-gray"><input type="number" value=1 onclick="inputNumber(this)" readonly></td>      <td class="btn light-gray"><input type="number" value="2" onclick="inputNumber(this)" readonly ></td>      <td class="btn light-gray"><input type="number" value="3" onclick="inputNumber(this)" readonly ></td>      <td class="btn gray"><input type="text" value="-" onclick="mathSymbol(this)" readonly></td>
+        </tr>
+        <tr>
+          <td class="btn light-gray"><input type="number" value=0 onclick="inputNumber(this)" readonly></td>      <td class="btn light-gray"><input type="text" value="." readonly></td>      <td id="solve" class="btn blue"><input id="solve" type="text" value="=" onclick="solve()" readonly></td>      <td class="btn gray"><input type="text" value="+" onclick="mathSymbol(this)" readonly></td>
+        </tr>
+      </table>
+      <a id="test">test</a>
+    </div>
+  </main>
+  <script>
+    document.getElementById('test').addEventListener('click',() => {
+      console.log(num)
+    })
+    let bracket = document.getElementById('bracket');
+    let solution = document.getElementById('solution');
+    const bracketStart = document.getElementById('bracket-start');
+    const bracketEnd = document.getElementById('bracket-end');
+    let numCheck = true;
+    let num = "";
+    let num2 = "";
+    let num3  = "";
+    let symbol = "";   
+    function display(text){
+      solution.innerHTML = text;
+    }
+    function inputNumber (number) {
+      if (symbol === "") {
+        num += number.value;
+        display(num);
+      } else {
+        num2 += number.value;
+        display(num + symbol + num2);
+      }
+    }
+    function bracketOn(btn) {
+      if (bracket.innerHTML === "" && btn.value === "("){
+        console.log('on');
+        bracket.innerHTML = btn.value;
+      } else{
+        bracket.innerHTML = "()";
+      }
+    }
+    function calculate (){
+      num = Number(num);
+      num2 = Number(num2);
+      switch (symbol) {
+        case "+":
+          num = num + num2
+          break;
+        case "-":
+          num = num - num2
+          break;
+        case "×":
+          num = num * num2
+          break;
+        case "÷":
+          num = num / num2
+          break;
+      }
+      num2 = "";
+      display(num)
+    }
+    function percent() {
+      if (numCheck) {
+        console.log(num, num * 0.01);
+        num = num * 0.01;
+        console.log(num)
+      } else {
+        num2 = num2 * 0.01;
+        console.log('b')
+      }
+      console.log(num)
+      display(num);
+    }
+    function mathSymbol(mark){
+      if (num2 !== "") {
+        calculate();
+      }
+      symbol = mark.value;
+      console.log(numCheck)
+      display(num + symbol);
+    }
+    function ac (){
+      num = "";
+      num2 = "";
+      symbol = "";
+      bracket.innerHTML = "";
+      display(0);
+    }
+    function solve(){
+      calculate();
+    }
+  </script>
+</body>
+</html>
